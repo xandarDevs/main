@@ -1,4 +1,7 @@
 import * as THREE from 'three';
+import WebGL from 'three/addons/capabilities/WebGL.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -7,11 +10,21 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 );
-const renderer = new THREE.WebGLRenderer();
+// const canvas = document.querySelector('#c');
+const renderer = new THREE.WebGLRenderer({
+    antialias : true,
+    alpha: true,
+});
 renderer.setSize(
     window.innerWidth,
     window.innerHeight
 );
+const controls = new OrbitControls(
+    camera,
+    renderer.domElement
+);
+const loader = new GLTFLoader();
+renderer.setAnimationLoop(animate);
 document.body.appendChild(renderer.domElement);
 
 const geometry = new THREE.BoxGeometry(
@@ -19,9 +32,11 @@ const geometry = new THREE.BoxGeometry(
     1,
     1
 );
+const texture = new THREE.TextureLoader();
 const material = new THREE.MeshBasicMaterial(
     {
-        color : 0x00ff00
+        // color : 0x00ff00
+        map : texture.load('images/logo_copilot.jpg'),
     }
 );
 const cube = new THREE.Mesh(
@@ -39,4 +54,10 @@ function animate(){
         camera
     );
 }
-renderer.setAnimationLoop(animate);
+
+if(WebGL.isWebGL2Available()){
+    animate();
+}else{
+    const warning = WebGL.getWebGL2ErrorMessage();
+    document.getElementById('container').appendChild(warning);
+}
