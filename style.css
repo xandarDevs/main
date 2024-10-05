@@ -57,6 +57,13 @@ h2 {
     margin-bottom: 10px;
 }
 
+/* Logo styles */
+#logo {
+    display: block;
+    margin: 0 auto;
+    width: 150px; /* Adjust the width as needed */
+    height: auto;
+}
 
 /* Footer styles */
 footer {
