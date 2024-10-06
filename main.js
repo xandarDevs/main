@@ -9,7 +9,7 @@ import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFact
 const clock = new THREE.Clock();
 let container;
 let camera, scene, raycaster, renderer;
-let controller, controllerGrip;
+let desktop_controller, xr_controller, controllerGrip;
 let geometry, texture, material;
 let room;
 var object;
@@ -53,8 +53,10 @@ function init(){
     renderer.xr.enabled = true;
     container.appendChild(renderer.domElement);
 
-    controller = renderer.xr.getController(0);
-    scene.add(controller);
+    desktop_controller = new OrbitControls(camera, renderer.domElement);
+
+    xr_controller = renderer.xr.getController(0);
+    scene.add(xr_controller);
 
     const controllerModelFactory = new XRControllerModelFactory();
     controllerGrip = renderer.xr.getControllerGrip(0);
