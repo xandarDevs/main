@@ -1,11 +1,11 @@
 import * as THREE from 'three';
-import WebGL from 'three/addons/capabilities/WebGL.js';
+// import WebGL from 'three/addons/capabilities/WebGL.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {XRButton} from 'three/addons/webxr/XRButton.js';
-import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
+// import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
 import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFactory.js';
 import Stats from 'three/addons/libs/stats.module.js';
-import { RGBELoader } from 'three/examples/jsm/Addons.js';
+// import { RGBELoader } from 'three/examples/jsm/Addons.js';
 
 const clock = new THREE.Clock();
 
