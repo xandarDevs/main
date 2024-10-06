@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import WebGL from 'three/addons/capabilities/WebGL.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {XRButton} from 'three/addons/webxr/XRButton.js';
 import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
 import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFactory.js';
