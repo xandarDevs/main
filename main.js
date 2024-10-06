@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 // import WebGL from 'three/addons/capabilities/WebGL.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {XRButton} from 'three/addons/webxr/XRButton.js';
+import {XRButton} from 'three/addons/webxr/VRButton.js';
 // import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
 // import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFactory.js';
 import Stats from 'three/addons/libs/stats.module.js';
@@ -52,7 +52,7 @@ function init(){
     raycaster = new THREE.Raycaster();
     
     renderer = new THREE.WebGLRenderer({
-        antialias : false,
+        antialias : true,
     });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -74,15 +74,16 @@ function init(){
 
     window.addEventListener('resize', onWindowResize);
 
-    document.body.appendChild(XRButton.createButton( renderer, {
-        'optionalFeatures': ['depth-sensing'],
-        'depthSensing': {
-            'usagePreference' : [
-                'gpu-optimized'
-            ],
-            'dataFormatPreference' : []
-        }
-    }));
+    document.body.appendChild(XRButton.createButton(renderer));
+    // document.body.appendChild(XRButton.createButton( renderer, {
+    //     'optionalFeatures': ['depth-sensing'],
+    //     'depthSensing': {
+    //         'usagePreference' : [
+    //             'gpu-optimized'
+    //         ],
+    //         'dataFormatPreference' : []
+    //     }
+    // }));
 }
 
 function cubeMapLoader(image_folder, scene){
@@ -112,6 +113,7 @@ function animate(){
     object.item1.rotation.x += 0.001;
     object.item1.rotation.y += 0.001;
     desktop_controller.update();
+    raycaster.setFromXRController(controller);
     cubeCamera.update(renderer, scene);
     renderer.render(scene, camera);
     stats.update();
