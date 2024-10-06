@@ -5,22 +5,29 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {XRButton} from 'three/addons/webxr/XRButton.js';
 import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
 import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFactory.js';
+import Stats from 'three/addons/libs/stats.module.js';
+import { RGBELoader } from 'three/examples/jsm/Addons.js';
 
 const clock = new THREE.Clock();
+
 let container;
 let camera, scene, raycaster, renderer;
 let desktop_controller, xr_controller, controllerGrip;
-let geometry, texture, material;
-let room;
-var object;
-let INTERSECTED;
+let texture;
+let object;
+let stats;
+let cubeCamera;
 
 init();
 function init(){
     container = document.createElement('div');
     document.body.appendChild(container);
 
+    stats = new Stats()
+
     scene = new THREE.Scene();
+    texture = new THREE.TextureLoader();
+
     camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerWidth,
@@ -29,8 +36,9 @@ function init(){
     );
     scene.add(camera);
     camera.position.z = 5;
+
+    scene.add(cubeMapLoader('images/cubemap/', scene));
     
-    texture = new THREE.TextureLoader();
     object = {
         item1 : new THREE.Mesh(
             new THREE.BoxGeometry(2, 2, 2,), 
@@ -54,6 +62,7 @@ function init(){
     container.appendChild(renderer.domElement);
 
     desktop_controller = new OrbitControls(camera, renderer.domElement);
+    // desktop_controller.autoRotate = true;
 
     xr_controller = renderer.xr.getController(0);
     scene.add(xr_controller);
@@ -76,15 +85,34 @@ function init(){
     }));
 }
 
+function cubeMapLoader(image_folder, scene){
+    const cubeTextureLoader = new THREE.CubeTextureLoader();
+    cubeTextureLoader.setPath(image_folder);
+    const skyboxTexture = cubeTextureLoader.load([
+        'front.jpg', 'back.jpg',
+        'left.jpg', 'right.jpg',
+        'top.jpg', 'bottom.jpg'
+    ]);
+    scene.background = skyboxTexture;
+
+    const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(512);
+    cubeCamera = new THREE.CubeCamera(0.1, 1000, cubeRenderTarget);
+    return cubeCamera;
+}
+
 function onWindowResize(){
     camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectMatrix();
+    camera.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function animate(){
-    object.item1.rotation.x += 0.01;
-    object.item1.rotation.y += 0.01;
+    // requestAnimationFrame(animate);
+    object.item1.rotation.x += 0.001;
+    object.item1.rotation.y += 0.001;
+    desktop_controller.update();
+    cubeCamera.update(renderer, scene);
     renderer.render(scene, camera);
+    stats.update();
 }
