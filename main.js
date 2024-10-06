@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {XRButton} from 'three/addons/webxr/XRButton.js';
 // import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
-import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFactory.js';
+// import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFactory.js';
 import Stats from 'three/addons/libs/stats.module.js';
 // import { RGBELoader } from 'three/examples/jsm/Addons.js';
 
@@ -58,18 +58,19 @@ function init(){
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setAnimationLoop(animate);
     renderer.xr.enabled = true;
+    renderer.xr.setReferenceSpaceType('local');
     container.appendChild(renderer.domElement);
 
     desktop_controller = new OrbitControls(camera, renderer.domElement);
     // desktop_controller.autoRotate = true;
 
-    xr_controller = renderer.xr.getController(0);
-    scene.add(xr_controller);
+    // xr_controller = renderer.xr.getController(0);
+    // scene.add(xr_controller);
 
-    const controllerModelFactory = new XRControllerModelFactory();
-    controllerGrip = renderer.xr.getControllerGrip(0);
-    controllerGrip.add(controllerModelFactory.createControllerModel(controllerGrip));
-    scene.add(controllerGrip);
+    // const controllerModelFactory = new XRControllerModelFactory();
+    // controllerGrip = renderer.xr.getControllerGrip(0);
+    // controllerGrip.add(controllerModelFactory.createControllerModel(controllerGrip));
+    // scene.add(controllerGrip);
 
     window.addEventListener('resize', onWindowResize);
 
