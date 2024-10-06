@@ -8,8 +8,8 @@ body {
     width: 100%;
     height: 100%;
     display: block;
-    background: url(images/logo_copilot.jpg) no-repeat center center;
-    background-size: cover;
+    /* background: url(images/logo_copilot.jpg) no-repeat center center; */
+    /* background-size: cover; */
 }
 
 /* Header styles */
@@ -80,4 +80,13 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+#info{
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 100;
+    display:block;
 }
