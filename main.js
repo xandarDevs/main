@@ -53,7 +53,7 @@ function init(){
     raycaster = new THREE.Raycaster();
     
     renderer = new THREE.WebGLRenderer({
-        antialias : true,
+        antialias : false,
     });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
