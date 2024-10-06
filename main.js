@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 // import WebGL from 'three/addons/capabilities/WebGL.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {XRButton} from 'three/addons/webxr/VRButton.js';
+import {XRButton} from 'three/addons/webxr/XRButton.js';
 // import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
 // import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFactory.js';
 import Stats from 'three/addons/libs/stats.module.js';
@@ -58,7 +58,7 @@ function init(){
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setAnimationLoop(animate);
     renderer.xr.enabled = true;
-    renderer.xr.setReferenceSpaceType('local');
+    // renderer.xr.setReferenceSpaceType('local');
     container.appendChild(renderer.domElement);
 
     desktop_controller = new OrbitControls(camera, renderer.domElement);
@@ -113,7 +113,7 @@ function animate(){
     object.item1.rotation.x += 0.001;
     object.item1.rotation.y += 0.001;
     desktop_controller.update();
-    raycaster.setFromXRController(controller);
+    // raycaster.setFromXRController(controller);
     cubeCamera.update(renderer, scene);
     renderer.render(scene, camera);
     stats.update();
