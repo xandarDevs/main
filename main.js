@@ -33,7 +33,7 @@ function init(){
     texture = new THREE.TextureLoader();
     object = {
         item1 : new THREE.Mesh(
-            new THREE.BoxGeometry(1, 1, 1,), 
+            new THREE.BoxGeometry(2, 2, 2,), 
             new THREE.MeshBasicMaterial({
                 // color : 0x00ff00,
                 map : texture.load('images/logo_copilot.jpg'),
