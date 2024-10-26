@@ -36,7 +36,7 @@ function init(){
     scene.add(camera);
     camera.position.z = 5;
 
-    scene.add(cubeMapLoader('images/cubemap/', scene));
+    scene.add(cubeMapLoader('images/cubemap/Bridge2/', scene));
     
     object = {
         item1 : new THREE.Mesh(
@@ -89,10 +89,15 @@ function init(){
 function cubeMapLoader(image_folder, scene){
     const cubeTextureLoader = new THREE.CubeTextureLoader();
     cubeTextureLoader.setPath(image_folder);
+    // const skyboxTexture = cubeTextureLoader.load([
+    //     'front.jpg', 'back.jpg',
+    //     'left.jpg', 'right.jpg',
+    //     'top.jpg', 'bottom.jpg'
+    // ]);
     const skyboxTexture = cubeTextureLoader.load([
-        'front.jpg', 'back.jpg',
-        'left.jpg', 'right.jpg',
-        'top.jpg', 'bottom.jpg'
+        'posz.jpg', 'negz.jpg',
+        'posx.jpg', 'negx.jpg',
+        'posy.jpg', 'negy.jpg'
     ]);
     scene.background = skyboxTexture;
 
