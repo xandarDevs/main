@@ -96,8 +96,8 @@ function cubeMapLoader(image_folder, scene){
     // ]);
     const skyboxTexture = cubeTextureLoader.load([
         'posy.jpg', 'negy.jpg',
-        'posx.jpg', 'negx.jpg',
-        'posz.jpg', 'negz.jpg'
+        'posz.jpg', 'negz.jpg',
+        'posx.jpg', 'negx.jpg'
     ]);
     scene.background = skyboxTexture;
 
